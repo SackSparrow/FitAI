@@ -60,7 +60,7 @@ export default function NutritionAI() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const bottomRef = useRef(null)
-  const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -75,26 +75,29 @@ export default function NutritionAI() {
 
     try {
       const history = messages.map(m => ({ role: m.role, content: m.content }))
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
+          'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'llama-3.3-70b-versatile',
           max_tokens: 600,
-          system: buildSystemPrompt(profile, totals),
-          messages: [...history, { role: 'user', content: userMsg }],
+          messages: [
+            { role: 'system', content: buildSystemPrompt(profile, totals) },
+            ...history,
+            { role: 'user', content: userMsg },
+          ],
         }),
       })
+
       const data = await response.json()
-      const reply = data.content?.[0]?.text || 'Sorry, I had trouble responding. Try again!'
+      const reply = data.choices?.[0]?.message?.content || 'Sorry, I had trouble responding. Try again!'
       setMessages(prev => [...prev, { role: 'assistant', content: reply }])
     } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "I couldn't connect right now. Please check your API key configuration and try again." }])
+      setMessages(prev => [...prev, { role: 'assistant', content: "I couldn't connect right now. Please check your API key and try again." }])
     }
     setLoading(false)
   }
@@ -108,7 +111,7 @@ export default function NutritionAI() {
         </div>
         <div>
           <h1 style={{ fontSize:'1.2rem', fontWeight:800 }}>AI Nutrition Coach</h1>
-          <p style={{ fontSize:'0.78rem', color:'var(--text-3)' }}>Aware of your real-time calorie & macro data</p>
+          <p style={{ fontSize:'0.78rem', color:'var(--text-3)' }}>Aware of your real-time calorie & macro data · Powered by Groq</p>
         </div>
         {/* Live stats pill */}
         <div style={{ marginLeft:'auto', display:'flex', gap:10 }}>
