@@ -74,8 +74,7 @@ function CalorieRing({ consumed, goal }) {
 }
 
 export default function Dashboard() {
-  const { profile } = useAuth()
-  const { user } = useAuth()
+  const { profile, user } = useAuth()
   const { totals, logs } = useFoodLog(user?.id)
   const streak = useStreak(user?.id)
   const navigate = useNavigate()

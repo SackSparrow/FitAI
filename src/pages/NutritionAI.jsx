@@ -48,8 +48,7 @@ INSTRUCTIONS:
 }
 
 export default function NutritionAI() {
-  const { profile } = useAuth()
-  const { user } = useAuth()
+  const { profile, user } = useAuth()
   const { totals } = useFoodLog(user?.id)
   const [messages, setMessages] = useState([
     {
