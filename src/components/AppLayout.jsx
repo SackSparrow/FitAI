@@ -76,27 +76,31 @@ export default function AppLayout() {
             <NavLink key={to} to={to}
               onMouseEnter={() => setHoveredItem(to)}
               onMouseLeave={() => setHoveredItem(null)}
-              style={({ isActive }) => ({
-                display: 'flex', alignItems: 'center', gap: 11,
-                padding: '10px 12px',
-                borderRadius: 'var(--radius-sm)',
-                color: isActive ? 'var(--accent)' : hoveredItem === to ? 'var(--text)' : 'var(--text-2)',
-                background: isActive ? 'var(--accent-dim)' : hoveredItem === to ? 'rgba(255,255,255,0.04)' : 'transparent',
-                fontWeight: isActive ? 600 : 400,
-                fontSize: '0.875rem',
-                transition: 'all 0.15s ease',
-                borderLeft: `2px solid ${isActive ? 'var(--accent)' : 'transparent'}`,
-                position: 'relative',
-              })}>
-              <Icon size={17} strokeWidth={isActive ? 2.2 : 1.8} />
-              {label}
-              {to === '/ai-coach' && (
-                <span style={{
-                  marginLeft:'auto', fontSize:'0.6rem', fontWeight:700,
-                  background:'var(--blue-dim)', color:'var(--blue)',
-                  border:'1px solid rgba(90,143,255,0.25)',
-                  padding:'2px 7px', borderRadius:100, letterSpacing:'0.05em',
-                }}>AI</span>
+            >
+              {({ isActive }) => (
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 11,
+                  padding: '10px 12px',
+                  borderRadius: 'var(--radius-sm)',
+                  color: isActive ? 'var(--accent)' : hoveredItem === to ? 'var(--text)' : 'var(--text-2)',
+                  background: isActive ? 'var(--accent-dim)' : hoveredItem === to ? 'rgba(255,255,255,0.04)' : 'transparent',
+                  fontWeight: isActive ? 600 : 400,
+                  fontSize: '0.875rem',
+                  transition: 'all 0.15s ease',
+                  borderLeft: `2px solid ${isActive ? 'var(--accent)' : 'transparent'}`,
+                  cursor: 'pointer',
+                }}>
+                  <Icon size={17} strokeWidth={isActive ? 2.2 : 1.8} />
+                  {label}
+                  {to === '/ai-coach' && (
+                    <span style={{
+                      marginLeft:'auto', fontSize:'0.6rem', fontWeight:700,
+                      background:'var(--blue-dim)', color:'var(--blue)',
+                      border:'1px solid rgba(90,143,255,0.25)',
+                      padding:'2px 7px', borderRadius:100, letterSpacing:'0.05em',
+                    }}>AI</span>
+                  )}
+                </div>
               )}
             </NavLink>
           ))}
