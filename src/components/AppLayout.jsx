@@ -140,9 +140,10 @@ export default function AppLayout() {
       </aside>
 
       {/* ── MAIN ── */}
-      <main key={location.pathname} style={{ flex:1, overflow:'auto', background:'var(--bg)' }}
-        className="anim-fade-up">
-        <Outlet />
+      <main style={{ flex:1, overflow:'auto', background:'var(--bg)', minHeight:'100vh' }}>
+        <div key={location.pathname} className="anim-fade-up" style={{ minHeight:'100%' }}>
+          <Outlet />
+        </div>
       </main>
     </div>
   )

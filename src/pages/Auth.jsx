@@ -48,8 +48,8 @@ export default function Auth() {
       <div style={{ position:'absolute', top:'-20%', left:'-10%', width:600, height:600, background:'radial-gradient(circle, rgba(200,245,90,0.05) 0%, transparent 65%)', pointerEvents:'none' }} />
       <div style={{ position:'absolute', bottom:'-10%', right:'-5%', width:500, height:500, background:'radial-gradient(circle, rgba(90,143,255,0.05) 0%, transparent 65%)', pointerEvents:'none' }} />
 
-      {/* Left panel (hidden on small) */}
-      <div style={{ flex:1, display:'flex', flexDirection:'column', justifyContent:'center', padding:'60px 64px', borderRight:'1px solid var(--border)', position:'relative' }}>
+      {/* Left panel */}
+      <div style={{ flex:1, display:'flex', flexDirection:'column', justifyContent:'center', padding:'60px 64px', borderRight:'1px solid var(--border)', position:'relative', background:'var(--bg)', minHeight:'100vh' }}>
         <Link to="/" style={{ display:'flex', alignItems:'center', gap:10, marginBottom:60 }}>
           <div style={{ width:34, height:34, background:'var(--accent)', borderRadius:10, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 0 20px rgba(200,245,90,0.3)' }}>
             <Activity size={18} color="#07070f" strokeWidth={2.5} />
